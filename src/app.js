@@ -5,6 +5,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const { NODE_ENV } = require("./config");
 const errorHandler = require("./error-handler");
+const projectsRouter = require('./Projects/projects-router');
 
 const app = express();
 
@@ -28,6 +29,8 @@ app.delete("/user/:userId", (req, res) => {
   console.log(userId);
   res.send("Got it.");
 });*/
+
+app.use(projectsRouter);
 
 app.use(errorHandler);
 
