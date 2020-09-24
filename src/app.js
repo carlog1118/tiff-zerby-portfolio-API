@@ -19,17 +19,6 @@ app.get("/", (req, res) => {
   res.send("Hello, world!");
 });
 
-/*app.post("/", (req, res) => {
-  console.log(req.body);
-  res.send("A POST Request");
-});
-
-app.delete("/user/:userId", (req, res) => {
-  const { userId } = req.params;
-  console.log(userId);
-  res.send("Got it.");
-});*/
-
 app.use(projectsRouter);
 
 app.use(errorHandler);
