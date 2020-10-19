@@ -9,6 +9,7 @@ const projectsRouter = require('./Projects/projects-router');
 const testimonialsRouter = require('./Testimonials/testimonials-router');
 const heroRouter = require('./Hero/hero-router');
 const aboutRouter = require('./About/about-router');
+const servicesRouter = require('./Services/services-router');
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use(projectsRouter);
 app.use(testimonialsRouter);
 app.use(heroRouter);
 app.use(aboutRouter);
+app.use(servicesRouter);
 
 app.use(errorHandler);
 
