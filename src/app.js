@@ -8,6 +8,7 @@ const errorHandler = require("./error-handler");
 const projectsRouter = require('./Projects/projects-router');
 const testimonialsRouter = require('./Testimonials/testimonials-router');
 const heroRouter = require('./Hero/hero-router');
+const aboutRouter = require('./About/about-router');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 app.use(projectsRouter);
 app.use(testimonialsRouter);
 app.use(heroRouter);
+app.use(aboutRouter);
 
 app.use(errorHandler);
 
