@@ -18,8 +18,6 @@ heroRouter.route("/api/hero/:id").patch(jsonParser, (req, res) => {
   const { content } = req.body;
   const updatedHero = { content };
 
-  console.log(updatedHero)
-
   if(!updatedHero.content){
     return res.status(400).json({
       error: {
@@ -27,6 +25,8 @@ heroRouter.route("/api/hero/:id").patch(jsonParser, (req, res) => {
       }
     })
   }
+
+  console.log(updatedHero)
   
   HeroService.updateHero(knexInstance, req.params.id, updatedHero)
     .then(numRowsAffected => {
