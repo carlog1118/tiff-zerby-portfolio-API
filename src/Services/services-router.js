@@ -4,7 +4,7 @@ const ServicesService = require("./services-service");
 const errorHandler = require("../error-handler");
 //const bodyParser = express.json();
 
-servicesRouter.route("/services").get((req, res) => {
+servicesRouter.route("/api/services").get((req, res) => {
   const knexInstance = req.app.get("db");
   ServicesService.getAllServices(knexInstance)
     .then((services) => {

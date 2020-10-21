@@ -1,4 +1,4 @@
 INSERT INTO hero
-  (herotext)
+  (content)
 VALUES
   ('This is generic hero text seed.');

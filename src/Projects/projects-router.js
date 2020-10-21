@@ -5,7 +5,7 @@ const errorHandler= require("../error-handler");
 //const bodyParser = express.json();
 
 projectsRouter
-  .route("/projects")
+  .route("/api/projects")
   .get((req, res) => {
     const knexInstance = req.app.get("db")
     ProjectsService.getAllProjects(knexInstance)

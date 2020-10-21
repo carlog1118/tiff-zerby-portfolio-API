@@ -5,7 +5,7 @@ const errorHandler= require("../error-handler");
 //const bodyParser = express.json();
 
 aboutRouter
-  .route("/about")
+  .route("/api/about")
   .get((req, res) => {
     const knexInstance = req.app.get("db")
     AboutService.getAbout(knexInstance)
