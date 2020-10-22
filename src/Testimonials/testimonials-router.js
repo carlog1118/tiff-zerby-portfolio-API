@@ -31,4 +31,21 @@ testimonialsRouter
       .catch(errorHandler)
   })
 
+  testimonialsRouter
+    .route("/api/testimonials/:id")
+    .delete((req, res) => {
+      const knexInstance = req.app.get("db");
+      const id= req.params.id
+      console.log(id)
+      TestimonialsService.deleteTest(
+        knexInstance,
+        req.params.id
+      )
+      .then(() => {
+        res.status(204).end()
+      })
+      .catch(errorHandler)
+    })
+
+
 module.exports = testimonialsRouter;

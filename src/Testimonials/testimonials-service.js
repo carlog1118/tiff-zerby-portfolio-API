@@ -10,6 +10,11 @@ const TestimonialsService = {
       .then(rows => {
         return rows[0]
       })
+  },
+  deleteTest(knex, id) {
+    return knex('testimonials')
+      .where( { id })
+      .delete()
   }
 };
 
