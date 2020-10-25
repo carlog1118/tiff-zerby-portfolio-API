@@ -29,6 +29,15 @@ projectsRouter
 
 projectsRouter
   .route("/api/projects/:id")
+    .get((req, res) => {
+      const knexInstance = req.app.get("db");
+      const id = req.params.id;
+      ProjectsService.getById(knexInstance, id)
+        .then((project) => {
+          res.json(project)
+        })
+        .catch(errorHandler);
+    })
     .delete((req, res) => {
     const knexInstance = req.app.get("db");
     const id = req.params.id;
