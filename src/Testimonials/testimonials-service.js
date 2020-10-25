@@ -13,7 +13,7 @@ const TestimonialsService = {
   },
   deleteTest(knex, id) {
     return knex('testimonials')
-      .where( { id })
+      .where({ id })
       .delete()
   }
 };
