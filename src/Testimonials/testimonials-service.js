@@ -2,6 +2,13 @@ const TestimonialsService = {
   getAllTestimonials(knex) {
     return knex.select("*").from("testimonials");
   },
+  getById(knex, id) {
+    return knex
+    .from('testimonials')
+    .select('*')
+    .where('id', id)
+    .first()
+  },
   insertTest(knex, newTest) {
     return knex
       .insert(newTest)

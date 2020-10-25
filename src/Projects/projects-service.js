@@ -6,7 +6,8 @@ const ProjectsService = {
     return knex
       .from('projects')
       .select('*')
-      .where('id', id).first()
+      .where('id', id)
+      .first()
   },
   insertProject(knex, newProject) {
     return knex

@@ -26,6 +26,15 @@ testimonialsRouter
   });
 
 testimonialsRouter.route("/api/testimonials/:id")
+  .get((req, res) => {
+    const knexInstance = req.app.get("db");
+    const id = req.params.id;
+    TestimonialsService.getById(knexInstance, id)
+      .then((test) => {
+        res.json(test)
+      })
+      .catch(errorHandler);
+  })
   .delete((req, res) => {
     const knexInstance = req.app.get("db");
     const id = req.params.id;
