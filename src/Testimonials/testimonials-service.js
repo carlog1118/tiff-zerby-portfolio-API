@@ -15,6 +15,11 @@ const TestimonialsService = {
     return knex('testimonials')
       .where({ id })
       .delete()
+  },
+  updateTest(knex, id, updatedFields) {
+    return knex('testimonials')
+      .where({ id })
+      .update(updatedFields)
   }
 };
 

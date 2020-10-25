@@ -25,14 +25,33 @@ testimonialsRouter
       .catch(errorHandler);
   });
 
-testimonialsRouter.route("/api/testimonials/:id").delete((req, res) => {
-  const knexInstance = req.app.get("db");
-  const id = req.params.id;
-  TestimonialsService.deleteTest(knexInstance, id)
-    .then(() => {
-      res.status(204).end();
-    })
-    .catch(errorHandler);
-});
+testimonialsRouter.route("/api/testimonials/:id")
+  .delete((req, res) => {
+    const knexInstance = req.app.get("db");
+    const id = req.params.id;
+    TestimonialsService.deleteTest(knexInstance, id)
+      .then(() => {
+        res.status(204).end();
+      })
+      .catch(errorHandler);
+  })
+  .patch(jsonParser,(req, res) => {
+    const knexInstance = req.app.get("db")
+    const { client, quote, author } = req.body;
+    const updatedTest = { client, quote, author }
+
+    const numberOfValues = Object.values(updatedTest).filter(Boolean).length;
+    if(numberOfValues === 0) {
+      return res.status(400).json({
+        error: {
+          message: `request body must contain at least one of the fields.`
+        }
+      });
+    };
+
+    TestimonialsService.updateTest(knexInstance, req.params.id, updatedTest)
+      .then(res.status(204).end())
+      .catch(errorHandler)
+  })
 
 module.exports = testimonialsRouter;

@@ -40,7 +40,7 @@ projectsRouter
     })
     .patch(jsonParser, (req, res) => {
       const knexInstance = req.app.get("db");
-      const { name, client, description } = req.body
+      const { name, client, description } = req.body;
       const updatedProject = { name, client, description}
       
       const numberOfValues = Object.values(updatedProject).filter(Boolean).length;
