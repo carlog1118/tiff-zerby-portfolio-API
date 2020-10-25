@@ -15,6 +15,11 @@ const ProjectsService = {
     return knex('projects')
       .where({ id })
       .delete()
+  },
+  updateProject(knex, id, updatedFields) {
+    return knex('projects')
+      .where({ id })
+      .update(updatedFields)
   }
 };
 

@@ -2,6 +2,7 @@ const express = require("express");
 const projectsRouter = express.Router();
 const ProjectsService = require("./projects-service");
 const errorHandler = require("../error-handler");
+const { end } = require("../logger");
 const jsonParser = express.json();
 
 projectsRouter
@@ -26,14 +27,34 @@ projectsRouter
       .catch(errorHandler);
   });
 
-projectsRouter.route("/api/projects/:id").delete((req, res) => {
-  const knexInstance = req.app.get("db");
-  const id = req.params.id;
-  ProjectsService.deleteProject(knexInstance, id)
-    .then(() => {
-      res.status(204).end();
+projectsRouter
+  .route("/api/projects/:id")
+    .delete((req, res) => {
+    const knexInstance = req.app.get("db");
+    const id = req.params.id;
+    ProjectsService.deleteProject(knexInstance, id)
+      .then(() => {
+        res.status(204).end();
+      })
+      .catch(errorHandler);
     })
-    .catch(errorHandler);
-});
+    .patch(jsonParser, (req, res) => {
+      const knexInstance = req.app.get("db");
+      const { name, client, description } = req.body
+      const updatedProject = { name, client, description}
+      
+      const numberOfValues = Object.values(updatedProject).filter(Boolean).length;
+      if(numberOfValues === 0) {
+        return res.status(400).json({
+            error: {
+                message: `request body must contain at least one of the fields.`
+            }
+        });
+      };
+
+      ProjectsService.updateProject(knexInstance, req.params.id, updatedProject)
+        .then(res.status(204).end())
+        .catch(errorHandler)
+    })
 
 module.exports = projectsRouter;
