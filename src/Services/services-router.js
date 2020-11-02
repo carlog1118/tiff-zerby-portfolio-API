@@ -25,13 +25,14 @@ servicesRouter
       .catch(errorHandler);
   });
 
-servicesRouter.route("/api/services/:id")
+servicesRouter
+  .route("/api/services/:id")
   .get((req, res) => {
     const knexInstance = req.app.get("db");
     const id = req.params.id;
     ServicesService.getById(knexInstance, id)
       .then((serv) => {
-        res.json(serv)
+        res.json(serv);
       })
       .catch(errorHandler);
   })
@@ -44,24 +45,23 @@ servicesRouter.route("/api/services/:id")
       })
       .catch(errorHandler);
   })
-  /*.patch(jsonParser,(req, res) => {
-    const knexInstance = req.app.get("db")
-    const { client, quote, author } = req.body;
-    const updatedTest = { client, quote, author }
+  .patch(jsonParser, (req, res) => {
+    const knexInstance = req.app.get("db");
+    const { name, description } = req.body;
+    const updatedServ = { name, description };
 
-    const numberOfValues = Object.values(updatedTest).filter(Boolean).length;
-    if(numberOfValues === 0) {
+    const numberOfValues = Object.values(updatedServ).filter(Boolean).length;
+    if (numberOfValues === 0) {
       return res.status(400).json({
         error: {
-          message: `request body must contain at least one of the fields.`
-        }
+          message: `request body must contain at least one of the fields.`,
+        },
       });
-    };
+    }
 
-    TestimonialsService.updateTest(knexInstance, req.params.id, updatedTest)
+    ServicesService.updateServ(knexInstance, req.params.id, updatedServ)
       .then(res.status(204).end())
-      .catch(errorHandler)
-  })*/
-
+      .catch(errorHandler);
+  });
 
 module.exports = servicesRouter;
