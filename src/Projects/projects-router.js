@@ -16,8 +16,8 @@ projectsRouter
       .catch(errorHandler);
   })
   .post(jsonParser, (req, res) => {
-    const { name, client, description } = req.body;
-    const newProject = { name, client, description };
+    const { name, client, description, image_url } = req.body;
+    const newProject = { name, client, description, image_url };
     const knexInstance = req.app.get("db");
 
     ProjectsService.insertProject(knexInstance, newProject)
@@ -49,8 +49,8 @@ projectsRouter
     })
     .patch(jsonParser, (req, res) => {
       const knexInstance = req.app.get("db");
-      const { name, client, description } = req.body;
-      const updatedProject = { name, client, description}
+      const { name, client, description, image_url } = req.body;
+      const updatedProject = { name, client, description, image_url }
       
       const numberOfValues = Object.values(updatedProject).filter(Boolean).length;
       if(numberOfValues === 0) {

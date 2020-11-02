@@ -15,8 +15,8 @@ heroRouter.route("/api/hero").get((req, res) => {
 
 heroRouter.route("/api/hero/:id").patch(jsonParser, (req, res) => {
   const knexInstance = req.app.get("db");
-  const { content } = req.body;
-  const updatedHero = { content };
+  const { content, image_url } = req.body;
+  const updatedHero = { content, image_url };
 
   if(!updatedHero.content){
     return res.status(400).json({

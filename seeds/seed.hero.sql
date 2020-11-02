@@ -1,4 +1,4 @@
 INSERT INTO hero
-  (content)
+  (content, image_url)
 VALUES
-  ('This is generic hero text seed.');
+  ('This is generic hero text seed.', 'https://www.dropbox.com/s/601t5hlagp9snsq/dog.jpg?dl=0');
