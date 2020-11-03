@@ -2,7 +2,7 @@ const express = require("express");
 const projectsRouter = express.Router();
 const ProjectsService = require("./projects-service");
 const errorHandler = require("../error-handler");
-const { end } = require("../logger");
+const { requireAuth } = require("../Middleware/jwt-auth");
 const jsonParser = express.json();
 
 projectsRouter
@@ -15,7 +15,7 @@ projectsRouter
       })
       .catch(errorHandler);
   })
-  .post(jsonParser, (req, res) => {
+  .post(requireAuth, jsonParser, (req, res) => {
     const { name, client, description, image_url } = req.body;
     const newProject = { name, client, description, image_url };
     const knexInstance = req.app.get("db");
@@ -38,7 +38,7 @@ projectsRouter
         })
         .catch(errorHandler);
     })
-    .delete((req, res) => {
+    .delete(requireAuth, (req, res) => {
     const knexInstance = req.app.get("db");
     const id = req.params.id;
     ProjectsService.deleteProject(knexInstance, id)
@@ -47,7 +47,7 @@ projectsRouter
       })
       .catch(errorHandler);
     })
-    .patch(jsonParser, (req, res) => {
+    .patch(requireAuth,jsonParser, (req, res) => {
       const knexInstance = req.app.get("db");
       const { name, client, description, image_url } = req.body;
       const updatedProject = { name, client, description, image_url }

@@ -1,6 +1,7 @@
 const express = require("express");
 const servicesRouter = express.Router();
 const ServicesService = require("./services-service");
+const { requireAuth } = require("../Middleware/jwt-auth");
 const errorHandler = require("../error-handler");
 const jsonParser = express.json();
 
@@ -14,7 +15,7 @@ servicesRouter
       })
       .catch(errorHandler);
   })
-  .post(jsonParser, (req, res) => {
+  .post(requireAuth, jsonParser, (req, res) => {
     const { name, description } = req.body;
     const newServ = { name, description };
     const knexInstance = req.app.get("db");
@@ -27,6 +28,7 @@ servicesRouter
 
 servicesRouter
   .route("/api/services/:id")
+  .all(requireAuth)
   .get((req, res) => {
     const knexInstance = req.app.get("db");
     const id = req.params.id;

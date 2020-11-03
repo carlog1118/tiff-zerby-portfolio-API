@@ -1,6 +1,7 @@
 const express = require("express");
 const testimonialsRouter = express.Router();
 const TestimonialsService = require("./testimonials-service");
+const { requireAuth } = require("../Middleware/jwt-auth");
 const errorHandler = require("../error-handler");
 const jsonParser = express.json();
 
@@ -14,7 +15,7 @@ testimonialsRouter
       })
       .catch(errorHandler);
   })
-  .post(jsonParser, (req, res) => {
+  .post(requireAuth, jsonParser, (req, res) => {
     const { client, quote, author } = req.body;
     const newTest = { client, quote, author };
     const knexInstance = req.app.get("db");
@@ -26,6 +27,7 @@ testimonialsRouter
   });
 
 testimonialsRouter.route("/api/testimonials/:id")
+  .all(requireAuth)
   .get((req, res) => {
     const knexInstance = req.app.get("db");
     const id = req.params.id;

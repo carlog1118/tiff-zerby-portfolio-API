@@ -9,6 +9,7 @@ const projectsRouter = require('./Projects/projects-router');
 const testimonialsRouter = require('./Testimonials/testimonials-router');
 const heroRouter = require('./Hero/hero-router');
 const aboutRouter = require('./About/about-router');
+const hero_buttonsRouter = require('./Hero_Buttons/hero_buttons-router');
 const authRouter = require('./Auth/auth-router');
 const servicesRouter = require('./Services/services-router');
 
@@ -30,6 +31,8 @@ app.use(heroRouter);
 app.use(aboutRouter);
 app.use(servicesRouter);
 app.use(authRouter);
+app.use(hero_buttonsRouter);
+
 
 app.use(errorHandler);
 
