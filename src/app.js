@@ -1,9 +1,9 @@
 require("dotenv").config();
+const { NODE_ENV } = require('./config')
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const helmet = require("helmet");
-const { NODE_ENV } = require("./config");
 const errorHandler = require("./error-handler");
 const projectsRouter = require('./Projects/projects-router');
 const testimonialsRouter = require('./Testimonials/testimonials-router');
@@ -18,6 +18,7 @@ const app = express();
 const morganOption = NODE_ENV === "production" ? "tiny" : "dev";
 
 app.use(morgan(morganOption));
+app.use(express.json())
 app.use(helmet());
 app.use(cors());
 
