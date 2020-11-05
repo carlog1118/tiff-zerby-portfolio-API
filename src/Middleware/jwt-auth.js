@@ -1,4 +1,4 @@
-const AuthService = require('../auth/auth-service');
+const AuthService= require('../Auth/auth-service');
 
 function requireAuth(req, res, next) {
   const authToken = req.get('Authorization') || ''
@@ -34,5 +34,5 @@ function requireAuth(req, res, next) {
 };
 
 module.exports = {
-  requireAuth,
+  requireAuth
 }

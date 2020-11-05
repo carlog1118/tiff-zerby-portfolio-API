@@ -47,7 +47,7 @@ projectsRouter
       })
       .catch(errorHandler);
     })
-    .patch(requireAuth,jsonParser, (req, res) => {
+    .patch(requireAuth, jsonParser, (req, res) => {
       const knexInstance = req.app.get("db");
       const { name, client, description, image_url } = req.body;
       const updatedProject = { name, client, description, image_url }
